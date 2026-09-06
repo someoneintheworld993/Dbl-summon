@@ -3,157 +3,609 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#07102c">
-<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#050817">
 <title>DBL Summon Fan V4</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;background:#02030c;color:#fff;font-family:system-ui,Arial,sans-serif}
-.app{max-width:720px;margin:auto;min-height:100vh;padding:14px;background:linear-gradient(155deg,#07143a,#250b2d,#052838)}
-h1{text-align:center;font-size:25px;margin:5px}.muted{text-align:center;opacity:.7;font-size:12px}
-.panel,.banner{margin:11px 0;padding:14px;border:1px solid #ffffff25;border-radius:20px;background:#ffffff0c}
-.stats{display:flex;justify-content:space-between;font-weight:900}
-.banner{min-height:185px;position:relative;overflow:hidden;background:linear-gradient(135deg,#42187d,#123e78)}
-.banner.old{filter:saturate(.8);opacity:.9}.banner:before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;right:-80px;top:-100px;background:#fff2;box-shadow:0 0 80px #fff3}
-.banner h2{margin:7px 0 5px;font-size:25px}.banner p{margin:5px 0;max-width:70%}
-.tag{display:inline-block;background:#ffd34c;color:#211500;padding:5px 9px;border-radius:20px;font-size:11px;font-weight:900}
-.bannerNav{display:flex;align-items:center;justify-content:space-between;gap:8px}.bannerNav button{width:44px;padding:10px}
-.dots{text-align:center;margin:7px}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#fff5;margin:3px}.dot.on{background:#ffd34c;transform:scale(1.35)}
-.buttons{display:grid;grid-template-columns:1fr 1fr;gap:9px}button{border:0;border-radius:15px;padding:13px;font-size:14px;font-weight:900;color:#fff;background:linear-gradient(135deg,#f07b16,#d42e68);cursor:pointer}
-button.secondary{background:#ffffff12;border:1px solid #ffffff25}.tabs{display:flex;gap:8px}.tabs button{flex:1}.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.unit{padding:12px;border-radius:14px;background:#ffffff0b;border:1px solid #ffffff20}.unit b{display:block}.hidden{display:none}
-#scene{display:none;position:fixed;inset:0;z-index:10;background:#01020a;overflow:hidden}
-.space{position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,#1854a5,#07102e 35%,#01020a 75%)}
-.stars{position:absolute;inset:-50px;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:47px 47px;opacity:.45;animation:stars 1.5s linear infinite}
-@keyframes stars{to{transform:translateY(47px)}}.orb{position:absolute;left:calc(50% - 35px);top:43%;width:70px;height:70px;border-radius:50%;background:#ffd64b;box-shadow:0 0 50px 20px #ff9d1a;animation:pulse .4s infinite alternate}
-@keyframes pulse{to{transform:scale(1.7)}}.beam{position:absolute;left:50%;top:0;width:7px;height:100%;background:#fff;box-shadow:0 0 30px 15px #43caff;transform:translateX(-50%) scaleY(0);animation:beam .7s 1.35s forwards}
-@keyframes beam{to{transform:translateX(-50%) scaleY(1)}}.clash{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-size:34px;font-weight:1000;text-shadow:0 0 25px #fff;animation:shake .12s 2s 8}
-@keyframes shake{50%{transform:translate(8px,-6px)}}.flash{position:absolute;inset:0;background:#fff;opacity:0;animation:flash .25s 2.8s forwards}
-@keyframes flash{30%{opacity:1}to{opacity:0}}.reveal{position:absolute;inset:0;display:grid;place-items:center;padding:20px;text-align:center;opacity:0;animation:show .5s 3.1s forwards}
-@keyframes show{to{opacity:1}}.card{width:min(92vw,430px);padding:30px;border-radius:28px;border:4px solid white;background:linear-gradient(145deg,#58167c,#b16a18,#1d1255);box-shadow:0 0 70px #ffcc66aa}
-.card.ultra{background:linear-gradient(145deg,#b47716,#22140a,#6d2088);box-shadow:0 0 90px #ffcc66}.card.legend{background:linear-gradient(145deg,#173f90,#7b1d63,#151b58);box-shadow:0 0 80px #5dbbff}
-.card.spark{background:linear-gradient(145deg,#173f90,#172758)}.card.extreme{background:linear-gradient(145deg,#1c315c,#242424)}
-.rarity{font-size:25px;font-weight:1000}.char{font-size:27px;font-weight:900;margin:18px 0}.close{margin-top:20px;background:#ffffff18}
-.featured{font-size:12px;opacity:.85}.limited{color:#ffd34c;font-weight:900}.arrow{background:#ffffff15}
-@media(max-width:480px){.app{padding:10px}.banner{min-height:205px}.banner p{max-width:100%}}
+*{box-sizing:border-box}
+
+html,body{
+  margin:0;
+  min-height:100%;
+  background:#02030b;
+  color:white;
+  font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+}
+
+body{
+  overflow-x:hidden;
+}
+
+.app{
+  width:min(760px,100%);
+  min-height:100vh;
+  margin:auto;
+  padding:12px;
+  background:
+    radial-gradient(circle at 50% -10%,#183b91 0,#0a1231 28%,transparent 55%),
+    linear-gradient(155deg,#05091b,#180721,#031d2a);
+}
+
+h1{
+  text-align:center;
+  margin:7px 0 2px;
+  font-size:27px;
+  font-weight:1000;
+  letter-spacing:.5px;
+}
+
+.subtitle{
+  text-align:center;
+  opacity:.65;
+  font-size:12px;
+  margin-bottom:13px;
+}
+
+.panel{
+  margin:10px 0;
+  padding:13px;
+  border:1px solid #ffffff20;
+  border-radius:20px;
+  background:#ffffff09;
+  backdrop-filter:blur(8px);
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.stat{
+  padding:12px;
+  border-radius:15px;
+  background:#ffffff0b;
+  text-align:center;
+  font-weight:900;
+}
+
+.stat span{
+  display:block;
+  font-size:11px;
+  opacity:.6;
+  margin-bottom:3px;
+}
+
+.stat b{
+  font-size:20px;
+}
+
+.banner{
+  min-height:205px;
+  padding:17px;
+  border-radius:22px;
+  overflow:hidden;
+  position:relative;
+  border:1px solid #ffffff30;
+  box-shadow:0 15px 45px #0008;
+}
+
+.banner:after{
+  content:"";
+  position:absolute;
+  width:240px;
+  height:240px;
+  border-radius:50%;
+  right:-100px;
+  top:-100px;
+  background:#ffffff15;
+  box-shadow:0 0 80px #ffffff20;
+}
+
+.bannerContent{
+  position:relative;
+  z-index:2;
+}
+
+.tag{
+  display:inline-block;
+  padding:5px 10px;
+  border-radius:20px;
+  background:#ffd84a;
+  color:#160f00;
+  font-size:11px;
+  font-weight:1000;
+}
+
+.banner h2{
+  font-size:25px;
+  margin:12px 0 5px;
+}
+
+.banner p{
+  margin:5px 0 15px;
+  max-width:75%;
+  opacity:.85;
+}
+
+.featured{
+  font-size:12px;
+  opacity:.9;
+}
+
+.bannerNav{
+  display:grid;
+  grid-template-columns:48px 1fr 48px;
+  gap:8px;
+  align-items:stretch;
+}
+
+button{
+  border:0;
+  border-radius:15px;
+  padding:13px;
+  color:white;
+  font-weight:1000;
+  font-size:14px;
+  cursor:pointer;
+  background:linear-gradient(135deg,#f47c18,#d52f6e);
+  box-shadow:0 7px 20px #0005;
+}
+
+button:active{
+  transform:scale(.97);
+}
+
+.arrow{
+  background:#ffffff12;
+  border:1px solid #ffffff20;
+  font-size:25px;
+}
+
+.buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:10px;
+}
+
+.summon1{
+  background:linear-gradient(135deg,#1269d9,#7036dc);
+}
+
+.summon10{
+  background:linear-gradient(135deg,#ed721b,#d82f68);
+}
+
+.guarantee{
+  text-align:center;
+  margin:8px 0;
+  font-size:11px;
+  opacity:.65;
+}
+
+.dots{
+  text-align:center;
+  margin:8px;
+}
+
+.dot{
+  display:inline-block;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#ffffff35;
+  margin:3px;
+}
+
+.dot.on{
+  background:#ffd34c;
+  transform:scale(1.4);
+}
+
+.tabs{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:7px;
+}
+
+.secondary{
+  background:#ffffff0b;
+  border:1px solid #ffffff18;
+  box-shadow:none;
+}
+
+.sectionTitle{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.sectionTitle h3{
+  margin:0;
+}
+
+.rates{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:7px;
+  margin-top:10px;
+}
+
+.rate{
+  padding:9px;
+  border-radius:12px;
+  background:#ffffff09;
+  border:1px solid #ffffff15;
+  font-size:12px;
+}
+
+.rate b{
+  display:block;
+  margin-bottom:2px;
+}
+
+.heroText{color:#9fb9ff}
+.extremeText{color:#9fc5ff}
+.sparkText{color:#ffe66a}
+.llText{color:#ff9d32}
+.ultraText{color:#ff5f42}
+.legendText{
+  color:#dba8ff;
+  text-shadow:0 0 12px #9c42ff;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.unit{
+  padding:11px;
+  border-radius:14px;
+  background:#ffffff09;
+  border:1px solid #ffffff15;
+}
+
+.unit b{
+  display:block;
+  margin-bottom:4px;
+}
+
+.unit small{
+  display:block;
+  opacity:.55;
+  margin-top:4px;
+}
+
+.rarityBadge{
+  display:inline-block;
+  padding:3px 7px;
+  border-radius:8px;
+  font-size:10px;
+  font-weight:1000;
+  margin-bottom:5px;
+  background:#ffffff14;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.empty{
+  text-align:center;
+  opacity:.55;
+  padding:18px;
+}
+
+/* SUMMON SCENE */
+
+#scene{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:100;
+  overflow:hidden;
+  background:#01020a;
+}
+
+.space{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 50% 42%,#2455bd 0,#0a1747 28%,#02030d 72%);
+}
+
+.stars{
+  position:absolute;
+  inset:-80px;
+  background-image:
+    radial-gradient(#fff 1px,transparent 1px),
+    radial-gradient(#fff 1px,transparent 1px);
+  background-size:47px 47px,83px 83px;
+  opacity:.45;
+  animation:stars 1.5s linear infinite;
+}
+
+@keyframes stars{
+  to{transform:translateY(47px)}
+}
+
+.orb{
+  position:absolute;
+  left:calc(50% - 38px);
+  top:43%;
+  width:76px;
+  height:76px;
+  border-radius:50%;
+  background:#ffe45d;
+  box-shadow:
+    0 0 35px 15px #ffad24,
+    0 0 100px 40px #ff761855;
+  animation:pulse .35s infinite alternate;
+}
+
+@keyframes pulse{
+  to{transform:scale(1.65)}
+}
+
+.beam{
+  position:absolute;
+  left:50%;
+  top:0;
+  width:8px;
+  height:100%;
+  background:white;
+  box-shadow:0 0 35px 18px #48cfff;
+  transform:translateX(-50%) scaleY(0);
+  animation:beam .7s 1.25s forwards;
+}
+
+@keyframes beam{
+  to{transform:translateX(-50%) scaleY(1)}
+}
+
+.clash{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  font-size:34px;
+  font-weight:1000;
+  text-shadow:0 0 30px white;
+  animation:shake .12s 1.9s 10;
+}
+
+@keyframes shake{
+  50%{transform:translate(8px,-6px)}
+}
+
+.flash{
+  position:absolute;
+  inset:0;
+  background:white;
+  opacity:0;
+  animation:flash .3s 2.65s forwards;
+}
+
+@keyframes flash{
+  25%{opacity:1}
+  to{opacity:0}
+}
+
+.reveal{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  padding:18px;
+  text-align:center;
+  opacity:0;
+  animation:show .5s 2.95s forwards;
+}
+
+@keyframes show{
+  to{opacity:1}
+}
+
+.card{
+  width:min(92vw,440px);
+  padding:27px 20px;
+  border-radius:28px;
+  border:3px solid white;
+  background:linear-gradient(145deg,#303c72,#17172d,#51206b);
+  box-shadow:0 0 70px #ffffff55;
+  animation:cardIn .45s 2.95s both;
+}
+
+@keyframes cardIn{
+  from{transform:scale(.55) rotate(-5deg)}
+  to{transform:scale(1) rotate(0)}
+}
+
+.card.hero{
+  background:linear-gradient(145deg,#273d71,#101a37);
+}
+
+.card.extreme{
+  background:linear-gradient(145deg,#34465d,#171b24);
+}
+
+.card.sparking{
+  background:linear-gradient(145deg,#153d91,#1b285f,#10172c);
+  box-shadow:0 0 75px #328cff;
+}
+
+.card.ll{
+  background:linear-gradient(145deg,#8d3915,#3b160d,#69220d);
+  box-shadow:0 0 85px #ff8a32;
+}
+
+.card.ultra{
+  background:linear-gradient(145deg,#bd7416,#281307,#70218b);
+  box-shadow:0 0 100px #ffc342;
+  border-color:#ffe18a;
+}
+
+.card.legend{
+  background:
+    radial-gradient(circle at 50% 0,#d85bff55,transparent 45%),
+    linear-gradient(145deg,#7b20c4,#16092e,#35107d);
+  box-shadow:
+    0 0 45px #d24dff,
+    0 0 110px #762dff;
+  border-color:#e3a5ff;
+  animation:
+    cardIn .45s 2.95s both,
+    legendGlow 1s 3.45s infinite alternate;
+}
+
+@keyframes legendGlow{
+  to{
+    box-shadow:
+      0 0 75px #ed72ff,
+      0 0 150px #712dff;
+  }
+}
+
+.rarity{
+  font-size:28px;
+  font-weight:1000;
+  letter-spacing:1px;
+}
+
+.char{
+  font-size:27px;
+  font-weight:1000;
+  margin:17px 0 12px;
+}
+
+.element{
+  opacity:.85;
+  font-size:13px;
+}
+
+.resultText{
+  margin-top:12px;
+  font-size:12px;
+  opacity:.75;
+}
+
+.close{
+  margin-top:20px;
+  width:100%;
+  background:#ffffff15;
+  border:1px solid #ffffff25;
+}
+
+/* LEGEND SPECIAL */
+
+.legendExplosion{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:0;
+}
+
+.legendExplosion.active{
+  animation:legendBurst 1.2s 2.65s forwards;
+}
+
+@keyframes legendBurst{
+  0%{
+    opacity:0;
+    transform:scale(.1);
+    background:radial-gradient(circle,#fff,transparent 5%);
+  }
+  35%{
+    opacity:1;
+    transform:scale(1);
+    background:radial-gradient(circle,#fff 0,#b44cff 8%,transparent 45%);
+  }
+  100%{
+    opacity:0;
+    transform:scale(2);
+  }
+}
+
+@media(max-width:480px){
+  .app{padding:9px}
+  .banner{min-height:220px}
+  .banner p{max-width:100%}
+  .rates{grid-template-columns:1fr 1fr}
+}
+
+@media(max-width:360px){
+  .grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+}
 </style>
 </head>
+
 <body>
+
 <main class="app">
+
 <h1>⚡ DBL SUMMON FAN V4</h1>
-<div class="muted">Original fan-made summon simulator — no real purchases</div>
-<div class="panel stats"><span>💎 <span id="cc">10,000</span></span><span>🎯 Pity <span id="pity">0</span>/50</span></div>
+<div class="subtitle">
+  Original fan-made summon simulator • No real purchases
+</div>
+
+<div class="panel stats">
+  <div class="stat">
+    <span>💎 CHRONO CRYSTALS</span>
+    <b id="cc">10,000</b>
+  </div>
+
+  <div class="stat">
+    <span>🎯 PITY</span>
+    <b><span id="pity">0</span>/50</b>
+  </div>
+</div>
 
 <div class="bannerNav">
-<button class="arrow" onclick="changeBanner(-1)">‹</button>
-<div id="banner" class="banner" style="flex:1"></div>
-<button class="arrow" onclick="changeBanner(1)">›</button>
+  <button class="arrow" onclick="changeBanner(-1)">‹</button>
+  <div id="banner" class="banner"></div>
+  <button class="arrow" onclick="changeBanner(1)">›</button>
 </div>
+
 <div id="dots" class="dots"></div>
 
 <div class="buttons">
-<button onclick="summon(1)">✨ SUMMON ×1<br>100 CC</button>
-<button onclick="summon(10)">🔥 SUMMON ×10<br>1,000 CC</button>
-</div>
-<div class="muted">10-pull guarantees SPARKING or better.</div>
+  <button class="summon1" onclick="summon(1)">
+    ✨ SUMMON ×1<br>
+    100 CC
+  </button>
 
-<div class="panel tabs">
-<button class="secondary" onclick="tab('collection')">📖 Collection</button>
-<button class="secondary" onclick="tab('history')">📜 History</button>
-<button class="secondary" onclick="resetSave()">♻️ Reset</button>
-</div>
-<section id="collection" class="panel"><h3>Collection</h3><div id="grid" class="grid"></div></section>
-<section id="history" class="panel hidden"><h3>Summon History</h3><div id="hist"></div></section>
-</main>
-
-<div id="scene">
-<div class="space"></div><div class="stars"></div><div class="orb"></div><div class="beam"></div>
-<div id="clash" class="clash">ENERGY<br>CHARGING...</div><div class="flash"></div>
-<div class="reveal"><div id="card" class="card">
-<div id="rarity" class="rarity"></div><div id="char" class="char"></div><div id="element"></div>
-<div id="bannerResult" class="featured"></div><button class="close" onclick="closeScene()">CONTINUE</button>
-</div></div>
+  <button class="summon10" onclick="summon(10)">
+    🔥 SUMMON ×10<br>
+    1,000 CC
+  </button>
 </div>
 
-<script>
-const BANNERS=[
- {name:"LEGEND Kaioken Goku",type:"LEGEND",featured:["SSB Kaioken Goku"],desc:"A high-energy LEGEND banner featuring Kaioken Goku.",theme:"linear-gradient(135deg,#7b1f2c,#153c8a,#190c3b)",limited:true},
- {name:"ULTRA Cooler",type:"ULTRA",featured:["Final Form Cooler"],desc:"The coldest featured ULTRA.",theme:"linear-gradient(135deg,#244a9a,#711c96,#160c2e)",limited:true},
- {name:"LEGEND Android 17 & Golden Frieza",type:"LEGEND",featured:["Android #17 & Golden Frieza"],desc:"A tag-style LEGEND banner with a featured duo.",theme:"linear-gradient(135deg,#12634f,#8c671b,#17152e)",limited:true},
- {name:"LEGEND Broly",type:"LEGEND",featured:["Legend Broly"],desc:"A power-focused Broly LEGEND banner.",theme:"linear-gradient(135deg,#155b3d,#143b72,#421057)",limited:true},
- {name:"ULTRA Beast Gohan",type:"ULTRA",featured:["Ultra Beast Gohan"],desc:"Returning banner — available for a limited time.",theme:"linear-gradient(135deg,#5a3caa,#132d65,#0a0b21)",old:true},
- {name:"ULTRA Legendary Super Saiyan Broly",type:"ULTRA",featured:["ULTRA Legendary Super Saiyan Broly"],desc:"Returning banner — available for a limited time.",theme:"linear-gradient(135deg,#14634b,#7b9b18,#180e2d)",old:true},
- {name:"ULTRA Broly",type:"ULTRA",featured:["ULTRA Broly"],desc:"Returning banner — available for a limited time.",theme:"linear-gradient(135deg,#4d1c63,#163b78,#090b1f)",old:true}
-];
+<div class="guarantee">
+  🔒 ×10 guarantees at least SPARKING or higher
+</div>
 
-const R=[
- ["LEGEND","SSB Kaioken Goku","BLUE",0],["LEGEND","Legend Broly","GREEN",3],
- ["ULTRA","Final Form Cooler","PURPLE",1],["LEGEND","Android #17 & Golden Frieza","GREEN",2],
- ["ULTRA","Ultra Beast Gohan","PURPLE",4],["ULTRA","ULTRA Legendary Super Saiyan Broly","GREEN",5],
- ["ULTRA","ULTRA Broly","PURPLE",6],["SPARKING","Super Vegito","PURPLE",-1],
- ["SPARKING","Gohan (Youth)","YELLOW",-1],["SPARKING","Super Saiyan 3 Goku","PURPLE",-1],
- ["SPARKING","Piccolo","GREEN",-1],["EXTREME","Trunks (Teen)","BLUE",-1],
- ["EXTREME","Piccolo","GREEN",-1],["HERO","Saibaman","RED",-1]
-];
+<div class="panel">
 
-let S=JSON.parse(localStorage.dblv4||'{"cc":10000,"pity":0,"collection":{},"history":[]}');
-let bannerIndex=0;
-const $=x=>document.getElementById(x);
+  <div class="sectionTitle">
+    <h3>🎯 Summon Rates</h3>
+  </div>
 
-function save(){localStorage.dblv4=JSON.stringify(S)}
-function renderBanner(){
- const b=BANNERS[bannerIndex], el=$("banner");
- el.style.background=b.theme; el.className="banner"+(b.old?" old":"");
- el.innerHTML=`<span class="tag">${b.type} BANNER</span>${b.old?'<span class="limited" style="margin-left:7px">⏳ RETURNING</span>':''}
- <h2>${b.name}</h2><p>${b.desc}</p><div class="featured">Featured: <b>${b.featured.join(" • ")}</b></div>`;
- $("dots").innerHTML=BANNERS.map((_,i)=>`<span class="dot ${i===bannerIndex?'on':''}"></span>`).join("");
-}
-function changeBanner(d){bannerIndex=(bannerIndex+d+BANNERS.length)%BANNERS.length;renderBanner()}
-function update(){
- $("cc").textContent=S.cc.toLocaleString();$("pity").textContent=S.pity;
- $("grid").innerHTML=Object.keys(S.collection).length?Object.keys(S.collection).map(i=>`<div class="unit"><b>${R[i][0]}</b>${R[i][1]}<small> ×${S.collection[i]}</small></div>`).join(""):"No characters yet.";
- $("hist").innerHTML=S.history.length?S.history.map(x=>`<div class="unit"><b>${x.rarity}</b>${x.name}<small>${x.banner} • ${x.time}</small></div>`).join(""):"No summons yet.";
-}
-function featuredIndexes(){return R.map((x,i)=>x[3]===bannerIndex?i:-1).filter(i=>i>=0)}
-function pull(){
- S.pity++;
- if(S.pity>=50){S.pity=0;return featuredIndexes()[0]??0}
- let r=Math.random()*10000;
- const f=featuredIndexes();
- // Featured pulls are deliberately rare but possible.
- if(r<25 && f.length)return f[Math.floor(Math.random()*f.length)];
- if(r<85){let u=R.map((x,i)=>x[0]==="ULTRA"?i:-1).filter(i=>i>=0);return u[Math.floor(Math.random()*u.length)]}
- if(r<900){let l=R.map((x,i)=>x[0]==="LEGEND"?i:-1).filter(i=>i>=0);return l[Math.floor(Math.random()*l.length)]}
- if(r<3300){let s=R.map((x,i)=>x[0]==="SPARKING"?i:-1).filter(i=>i>=0);return s[Math.floor(Math.random()*s.length)]}
- if(r<7000){let e=R.map((x,i)=>x[0]==="EXTREME"?i:-1).filter(i=>i>=0);return e[Math.floor(Math.random()*e.length)]}
- return R.length-1;
-}
-function summon(n){
- let cost=n===1?100:1000;
- if(S.cc<cost)return alert("Not enough Chrono Crystals!");
- S.cc-=cost;let a=[];
- for(let i=0;i<n;i++){
-   let p=pull();
-   if(n===10 && i===9 && R[p][0]==="HERO")p=R.findIndex(x=>x[0]==="SPARKING");
-   a.push(p);S.collection[p]=(S.collection[p]||0)+1;
- }
- const current=BANNERS[bannerIndex].name;
- S.history.unshift(...a.map(p=>({name:R[p][1],rarity:R[p][0],banner:current,time:new Date().toLocaleString()})));
- S.history=S.history.slice(0,100);save();update();
- $("scene").style.display="block";$("clash").innerHTML="ENERGY<br>CHARGING...";
- setTimeout(()=>{$("clash").innerHTML="💥 CLASH!"},850);
- setTimeout(()=>{$("clash").innerHTML="🔥 TRANSFORMATION!"},1600);
- const p=a[a.length-1], rr=R[p];
- setTimeout(()=>{
-   $("rarity").textContent="★ "+rr[0]+" ★";$("char").textContent=rr[1];
-   $("element").textContent="ELEMENT: "+rr[2];
-   $("bannerResult").textContent=(rr[3]===bannerIndex?"FEATURED CHARACTER!":"Summoned from "+current);
-   $("card").className="card "+(rr[0]==="ULTRA"?"ultra":rr[0]==="LEGEND"?"legend":rr[0]==="SPARKING"?"spark":"extreme");
- },3000);
-}
-function closeScene(){$("scene").style.display="none";update()}
-function tab(t){$("collection").classList.toggle("hidden",t!=="collection");$("history").classList.toggle("hidden",t!=="history")}
-function resetSave(){if(confirm("Reset all progress?")){S={cc:10000,pity:0,collection:{},history:[]};save();update()}}
-renderBanner();update();
-</script>
-</body>
-</html>
+  <div class="rates">
+
+    <div class="rate">
+      <b class="heroText">HERO</b>
+      65.00%
+    </div>
+
+    <div class="rate">
+      <b class="extremeText">EXTREME</b>
+      25.00%
+    </div>
+
+    <div class="rate">
+      <b class="sparkText">SPARKING
