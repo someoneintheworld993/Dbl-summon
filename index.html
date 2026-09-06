@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#050817">
-<title>DBL Summon Fan V4</title>
+<title>DBL Summon Fan V5</title>
 
 <style>
 *{box-sizing:border-box}
@@ -12,47 +12,57 @@
 html,body{
   margin:0;
   min-height:100%;
-  background:#02030b;
-  color:white;
+  background:#02030a;
+  color:#fff;
   font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;
 }
 
-body{
-  overflow-x:hidden;
+body{overflow-x:hidden}
+
+button{
+  border:0;
+  color:#fff;
+  font-weight:900;
+  cursor:pointer;
+  border-radius:15px;
+  padding:13px;
+  font-size:14px;
+  transition:.15s;
 }
 
+button:active{transform:scale(.96)}
+
 .app{
-  width:min(760px,100%);
+  width:min(780px,100%);
   min-height:100vh;
   margin:auto;
-  padding:12px;
+  padding:10px;
   background:
-    radial-gradient(circle at 50% -10%,#183b91 0,#0a1231 28%,transparent 55%),
-    linear-gradient(155deg,#05091b,#180721,#031d2a);
+    radial-gradient(circle at 50% -10%,#20469c 0,#0a1230 28%,transparent 58%),
+    linear-gradient(150deg,#040714,#180820,#031d29);
 }
 
 h1{
   text-align:center;
-  margin:7px 0 2px;
-  font-size:27px;
+  margin:7px 0 1px;
+  font-size:28px;
   font-weight:1000;
-  letter-spacing:.5px;
 }
 
 .subtitle{
   text-align:center;
-  opacity:.65;
-  font-size:12px;
-  margin-bottom:13px;
+  opacity:.6;
+  font-size:11px;
+  margin-bottom:12px;
 }
 
 .panel{
   margin:10px 0;
   padding:13px;
-  border:1px solid #ffffff20;
+  border:1px solid #ffffff18;
   border-radius:20px;
   background:#ffffff09;
-  backdrop-filter:blur(8px);
+  backdrop-filter:blur(10px);
 }
 
 .stats{
@@ -62,44 +72,40 @@ h1{
 }
 
 .stat{
-  padding:12px;
-  border-radius:15px;
-  background:#ffffff0b;
   text-align:center;
-  font-weight:900;
+  padding:11px;
+  border-radius:15px;
+  background:#ffffff09;
 }
 
 .stat span{
   display:block;
-  font-size:11px;
-  opacity:.6;
+  opacity:.55;
+  font-size:10px;
   margin-bottom:3px;
 }
 
-.stat b{
-  font-size:20px;
-}
+.stat b{font-size:20px}
 
 .banner{
-  min-height:205px;
-  padding:17px;
-  border-radius:22px;
-  overflow:hidden;
   position:relative;
+  min-height:215px;
+  padding:17px;
+  overflow:hidden;
+  border-radius:23px;
   border:1px solid #ffffff30;
   box-shadow:0 15px 45px #0008;
 }
 
-.banner:after{
+.banner:before{
   content:"";
   position:absolute;
-  width:240px;
-  height:240px;
-  border-radius:50%;
-  right:-100px;
+  width:250px;
+  height:250px;
+  right:-90px;
   top:-100px;
-  background:#ffffff15;
-  box-shadow:0 0 80px #ffffff20;
+  border-radius:50%;
+  background:#ffffff16;
 }
 
 .bannerContent{
@@ -109,121 +115,99 @@ h1{
 
 .tag{
   display:inline-block;
-  padding:5px 10px;
+  padding:5px 9px;
   border-radius:20px;
-  background:#ffd84a;
-  color:#160f00;
-  font-size:11px;
+  background:#ffd84d;
+  color:#160d00;
+  font-size:10px;
   font-weight:1000;
 }
 
 .banner h2{
+  margin:12px 0 4px;
   font-size:25px;
-  margin:12px 0 5px;
 }
 
 .banner p{
-  margin:5px 0 15px;
-  max-width:75%;
-  opacity:.85;
+  max-width:85%;
+  opacity:.8;
+  font-size:13px;
 }
 
 .featured{
   font-size:12px;
-  opacity:.9;
 }
 
 .bannerNav{
   display:grid;
-  grid-template-columns:48px 1fr 48px;
-  gap:8px;
-  align-items:stretch;
-}
-
-button{
-  border:0;
-  border-radius:15px;
-  padding:13px;
-  color:white;
-  font-weight:1000;
-  font-size:14px;
-  cursor:pointer;
-  background:linear-gradient(135deg,#f47c18,#d52f6e);
-  box-shadow:0 7px 20px #0005;
-}
-
-button:active{
-  transform:scale(.97);
+  grid-template-columns:47px 1fr 47px;
+  gap:7px;
 }
 
 .arrow{
-  background:#ffffff12;
+  background:#ffffff10;
   border:1px solid #ffffff20;
-  font-size:25px;
-}
-
-.buttons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px;
-  margin-top:10px;
-}
-
-.summon1{
-  background:linear-gradient(135deg,#1269d9,#7036dc);
-}
-
-.summon10{
-  background:linear-gradient(135deg,#ed721b,#d82f68);
-}
-
-.guarantee{
-  text-align:center;
-  margin:8px 0;
-  font-size:11px;
-  opacity:.65;
+  font-size:26px;
 }
 
 .dots{
   text-align:center;
-  margin:8px;
+  padding:7px;
 }
 
 .dot{
   display:inline-block;
   width:7px;
   height:7px;
-  border-radius:50%;
-  background:#ffffff35;
   margin:3px;
+  border-radius:50%;
+  background:#ffffff30;
 }
 
 .dot.on{
-  background:#ffd34c;
-  transform:scale(1.4);
+  background:#ffd74d;
+  transform:scale(1.35);
 }
 
-.tabs{
+.buttons{
   display:grid;
-  grid-template-columns:1fr 1fr 1fr;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.summon1{
+  background:linear-gradient(135deg,#116bdc,#7338df);
+}
+
+.summon10{
+  background:linear-gradient(135deg,#f27b18,#d82d67);
+}
+
+.guarantee{
+  text-align:center;
+  opacity:.55;
+  font-size:10px;
+  margin-top:7px;
+}
+
+.quickButtons{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
   gap:7px;
 }
 
 .secondary{
-  background:#ffffff0b;
-  border:1px solid #ffffff18;
-  box-shadow:none;
+  background:#ffffff0c;
+  border:1px solid #ffffff17;
 }
 
 .sectionTitle{
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
 }
 
-.sectionTitle h3{
-  margin:0;
-}
+.sectionTitle h3{margin:0}
 
 .rates{
   display:grid;
@@ -235,24 +219,21 @@ button:active{
 .rate{
   padding:9px;
   border-radius:12px;
-  background:#ffffff09;
-  border:1px solid #ffffff15;
-  font-size:12px;
+  background:#ffffff08;
+  border:1px solid #ffffff12;
+  font-size:11px;
 }
 
-.rate b{
-  display:block;
-  margin-bottom:2px;
-}
+.rate b{display:block;margin-bottom:2px}
 
-.heroText{color:#9fb9ff}
-.extremeText{color:#9fc5ff}
-.sparkText{color:#ffe66a}
-.llText{color:#ff9d32}
-.ultraText{color:#ff5f42}
-.legendText{
-  color:#dba8ff;
-  text-shadow:0 0 12px #9c42ff;
+.hero{color:#a8c0ff}
+.extreme{color:#9bcaff}
+.spark{color:#ffe36b}
+.ll{color:#ff9c35}
+.ultra{color:#ff6448}
+.legend{
+  color:#df9aff;
+  text-shadow:0 0 12px #b23cff;
 }
 
 .grid{
@@ -265,7 +246,7 @@ button:active{
   padding:11px;
   border-radius:14px;
   background:#ffffff09;
-  border:1px solid #ffffff15;
+  border:1px solid #ffffff14;
 }
 
 .unit b{
@@ -276,27 +257,96 @@ button:active{
 .unit small{
   display:block;
   opacity:.55;
-  margin-top:4px;
 }
 
-.rarityBadge{
+.badge{
   display:inline-block;
   padding:3px 7px;
   border-radius:8px;
-  font-size:10px;
+  background:#ffffff13;
+  font-size:9px;
   font-weight:1000;
   margin-bottom:5px;
-  background:#ffffff14;
 }
 
-.hidden{
-  display:none!important;
-}
+.hidden{display:none!important}
 
 .empty{
-  text-align:center;
-  opacity:.55;
   padding:18px;
+  text-align:center;
+  opacity:.5;
+}
+
+.mission{
+  margin-top:8px;
+  padding:10px;
+  border-radius:13px;
+  background:#ffffff09;
+}
+
+.missionTop{
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+  font-weight:900;
+}
+
+.progress{
+  height:7px;
+  margin:7px 0;
+  border-radius:10px;
+  background:#ffffff14;
+  overflow:hidden;
+}
+
+.progress div{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#36bfff,#a349ff);
+}
+
+.mission button{
+  width:100%;
+  padding:8px;
+  background:#ffffff12;
+  font-size:11px;
+}
+
+.mission button.claimed{
+  opacity:.4;
+}
+
+/* STEP UP */
+
+.step{
+  padding:11px;
+  margin-top:7px;
+  border-radius:13px;
+  background:#ffffff08;
+  border:1px solid #ffffff12;
+}
+
+.step.active{
+  border-color:#ffd34d;
+  box-shadow:0 0 18px #ffcf3925;
+}
+
+.step b{font-size:13px}
+
+.step small{
+  display:block;
+  opacity:.55;
+  margin-top:3px;
+}
+
+.step button{
+  width:100%;
+  margin-top:7px;
+  background:linear-gradient(135deg,#d83478,#7737dc);
+}
+
+.step button:disabled{
+  opacity:.4;
 }
 
 /* SUMMON SCENE */
@@ -305,7 +355,7 @@ button:active{
   display:none;
   position:fixed;
   inset:0;
-  z-index:100;
+  z-index:1000;
   overflow:hidden;
   background:#01020a;
 }
@@ -314,52 +364,72 @@ button:active{
   position:absolute;
   inset:0;
   background:
-    radial-gradient(circle at 50% 42%,#2455bd 0,#0a1747 28%,#02030d 72%);
+    radial-gradient(circle at 50% 45%,#275bc4 0,#0b1746 28%,#01020b 75%);
 }
 
 .stars{
   position:absolute;
-  inset:-80px;
+  inset:-100px;
   background-image:
     radial-gradient(#fff 1px,transparent 1px),
     radial-gradient(#fff 1px,transparent 1px);
-  background-size:47px 47px,83px 83px;
-  opacity:.45;
-  animation:stars 1.5s linear infinite;
+  background-size:43px 43px,79px 79px;
+  opacity:.5;
+  animation:stars 1.4s linear infinite;
 }
 
 @keyframes stars{
-  to{transform:translateY(47px)}
+  to{transform:translateY(43px)}
+}
+
+.gokuAura{
+  position:absolute;
+  left:50%;
+  top:47%;
+  width:35px;
+  height:150px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:#ffffff;
+  box-shadow:
+    0 0 20px 10px #49caff,
+    0 0 65px 25px #2874ff88;
+  animation:aura 1s infinite alternate;
+}
+
+@keyframes aura{
+  to{transform:translate(-50%,-50%) scale(1.35,1.08)}
 }
 
 .orb{
   position:absolute;
-  left:calc(50% - 38px);
-  top:43%;
-  width:76px;
-  height:76px;
+  left:50%;
+  top:47%;
+  width:70px;
+  height:70px;
+  transform:translate(-50%,-50%);
   border-radius:50%;
-  background:#ffe45d;
+  background:#ffe55b;
   box-shadow:
-    0 0 35px 15px #ffad24,
-    0 0 100px 40px #ff761855;
+    0 0 35px 14px #ffad25,
+    0 0 100px 45px #ff702255;
   animation:pulse .35s infinite alternate;
 }
 
 @keyframes pulse{
-  to{transform:scale(1.65)}
+  to{transform:translate(-50%,-50%) scale(1.65)}
 }
 
 .beam{
   position:absolute;
   left:50%;
   top:0;
-  width:8px;
+  width:7px;
   height:100%;
-  background:white;
-  box-shadow:0 0 35px 18px #48cfff;
+  background:#fff;
+  box-shadow:0 0 35px 18px #46ceff;
   transform:translateX(-50%) scaleY(0);
-  animation:beam .7s 1.25s forwards;
+  animation:beam .7s 1.4s forwards;
 }
 
 @keyframes beam{
@@ -372,27 +442,22 @@ button:active{
   display:grid;
   place-items:center;
   text-align:center;
-  font-size:34px;
+  font-size:32px;
   font-weight:1000;
-  text-shadow:0 0 30px white;
-  animation:shake .12s 1.9s 10;
-}
-
-@keyframes shake{
-  50%{transform:translate(8px,-6px)}
+  text-shadow:0 0 30px #fff;
 }
 
 .flash{
   position:absolute;
   inset:0;
-  background:white;
+  background:#fff;
   opacity:0;
-  animation:flash .3s 2.65s forwards;
+  animation:flash .35s 2.7s forwards;
 }
 
 @keyframes flash{
-  25%{opacity:1}
-  to{opacity:0}
+  20%{opacity:1}
+  100%{opacity:0}
 }
 
 .reveal{
@@ -400,10 +465,9 @@ button:active{
   inset:0;
   display:grid;
   place-items:center;
-  padding:18px;
-  text-align:center;
+  padding:15px;
   opacity:0;
-  animation:show .5s 2.95s forwards;
+  animation:show .5s 3s forwards;
 }
 
 @keyframes show{
@@ -411,17 +475,18 @@ button:active{
 }
 
 .card{
-  width:min(92vw,440px);
-  padding:27px 20px;
+  width:min(93vw,450px);
+  padding:25px 20px;
   border-radius:28px;
-  border:3px solid white;
-  background:linear-gradient(145deg,#303c72,#17172d,#51206b);
+  border:3px solid #fff;
+  text-align:center;
+  background:linear-gradient(145deg,#26366d,#14152b,#54206d);
   box-shadow:0 0 70px #ffffff55;
-  animation:cardIn .45s 2.95s both;
+  animation:cardIn .5s 3s both;
 }
 
 @keyframes cardIn{
-  from{transform:scale(.55) rotate(-5deg)}
+  from{transform:scale(.5) rotate(-7deg)}
   to{transform:scale(1) rotate(0)}
 }
 
@@ -439,90 +504,86 @@ button:active{
 }
 
 .card.ll{
-  background:linear-gradient(145deg,#8d3915,#3b160d,#69220d);
+  background:linear-gradient(145deg,#913914,#3b150c,#67220d);
   box-shadow:0 0 85px #ff8a32;
 }
 
 .card.ultra{
-  background:linear-gradient(145deg,#bd7416,#281307,#70218b);
-  box-shadow:0 0 100px #ffc342;
-  border-color:#ffe18a;
+  background:linear-gradient(145deg,#c07817,#281306,#70208b);
+  box-shadow:0 0 105px #ffc542;
+  border-color:#ffe39a;
 }
 
 .card.legend{
   background:
-    radial-gradient(circle at 50% 0,#d85bff55,transparent 45%),
-    linear-gradient(145deg,#7b20c4,#16092e,#35107d);
+    radial-gradient(circle at 50% 0,#ef70ff55,transparent 42%),
+    linear-gradient(145deg,#8220c8,#15082d,#35117e);
+  border-color:#e4a8ff;
   box-shadow:
-    0 0 45px #d24dff,
-    0 0 110px #762dff;
-  border-color:#e3a5ff;
+    0 0 50px #dd55ff,
+    0 0 130px #762dff;
   animation:
-    cardIn .45s 2.95s both,
-    legendGlow 1s 3.45s infinite alternate;
+    cardIn .5s 3s both,
+    legendGlow .8s 3.5s infinite alternate;
 }
 
 @keyframes legendGlow{
   to{
     box-shadow:
-      0 0 75px #ed72ff,
-      0 0 150px #712dff;
+      0 0 80px #ef74ff,
+      0 0 170px #762dff;
   }
 }
 
-.rarity{
+.rarityText{
   font-size:28px;
   font-weight:1000;
-  letter-spacing:1px;
 }
 
-.char{
+.characterText{
   font-size:27px;
   font-weight:1000;
-  margin:17px 0 12px;
+  margin:16px 0 9px;
 }
 
-.element{
-  opacity:.85;
-  font-size:13px;
+.elementText{
+  opacity:.8;
+  font-size:12px;
 }
 
 .resultText{
-  margin-top:12px;
-  font-size:12px;
-  opacity:.75;
+  margin-top:10px;
+  opacity:.65;
+  font-size:11px;
 }
 
 .close{
-  margin-top:20px;
   width:100%;
-  background:#ffffff15;
+  margin-top:18px;
+  background:#ffffff13;
   border:1px solid #ffffff25;
 }
 
-/* LEGEND SPECIAL */
-
-.legendExplosion{
+.special{
   position:absolute;
   inset:0;
   pointer-events:none;
   opacity:0;
 }
 
-.legendExplosion.active{
-  animation:legendBurst 1.2s 2.65s forwards;
+.special.legendBurst{
+  animation:legendBurst 1.3s 2.7s forwards;
 }
 
 @keyframes legendBurst{
   0%{
     opacity:0;
-    transform:scale(.1);
-    background:radial-gradient(circle,#fff,transparent 5%);
+    transform:scale(.05);
+    background:radial-gradient(circle,#fff,transparent 4%);
   }
-  35%{
+  30%{
     opacity:1;
-    transform:scale(1);
-    background:radial-gradient(circle,#fff 0,#b44cff 8%,transparent 45%);
+    background:radial-gradient(circle,#fff 0,#df56ff 8%,transparent 48%);
   }
   100%{
     opacity:0;
@@ -530,16 +591,77 @@ button:active{
   }
 }
 
-@media(max-width:480px){
-  .app{padding:9px}
-  .banner{min-height:220px}
-  .banner p{max-width:100%}
-  .rates{grid-template-columns:1fr 1fr}
+.multiple{
+  position:absolute;
+  left:12px;
+  right:12px;
+  bottom:18px;
+  z-index:20;
+  text-align:center;
+  opacity:0;
+  animation:multiple .5s 2.7s forwards;
 }
 
-@media(max-width:360px){
+@keyframes multiple{
+  to{opacity:1}
+}
+
+.multiple span{
+  display:inline-block;
+  padding:7px 10px;
+  margin:2px;
+  border-radius:10px;
+  background:#0008;
+  font-size:10px;
+  font-weight:900;
+}
+
+.dailyBox{
+  text-align:center;
+}
+
+.dailyBox button{
+  width:100%;
+  margin-top:8px;
+  background:linear-gradient(135deg,#e7a51a,#d43d55);
+}
+
+.dailyBox button:disabled{
+  opacity:.4;
+}
+
+/* toast */
+
+#toast{
+  position:fixed;
+  left:50%;
+  bottom:20px;
+  transform:translateX(-50%) translateY(30px);
+  z-index:3000;
+  padding:11px 16px;
+  border-radius:14px;
+  background:#101425ee;
+  border:1px solid #ffffff20;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  font-size:12px;
+  font-weight:900;
+}
+
+#toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+@media(max-width:430px){
+  .banner{min-height:225px}
+  .grid{grid-template-columns:1fr 1fr}
+}
+
+@media(max-width:350px){
+  .quickButtons{grid-template-columns:1fr}
   .grid{grid-template-columns:1fr}
-  .stats{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
@@ -548,12 +670,13 @@ button:active{
 
 <main class="app">
 
-<h1>⚡ DBL SUMMON FAN V4</h1>
+<h1>⚡ DBL SUMMON FAN V5</h1>
 <div class="subtitle">
-  Original fan-made summon simulator • No real purchases
+  Fan-made simulator • No real purchases
 </div>
 
 <div class="panel stats">
+
   <div class="stat">
     <span>💎 CHRONO CRYSTALS</span>
     <b id="cc">10,000</b>
@@ -563,17 +686,23 @@ button:active{
     <span>🎯 PITY</span>
     <b><span id="pity">0</span>/50</b>
   </div>
+
 </div>
 
 <div class="bannerNav">
+
   <button class="arrow" onclick="changeBanner(-1)">‹</button>
+
   <div id="banner" class="banner"></div>
+
   <button class="arrow" onclick="changeBanner(1)">›</button>
+
 </div>
 
 <div id="dots" class="dots"></div>
 
 <div class="buttons">
+
   <button class="summon1" onclick="summon(1)">
     ✨ SUMMON ×1<br>
     100 CC
@@ -583,10 +712,27 @@ button:active{
     🔥 SUMMON ×10<br>
     1,000 CC
   </button>
+
 </div>
 
 <div class="guarantee">
-  🔒 ×10 guarantees at least SPARKING or higher
+  ×10 guarantees SPARKING or higher
+</div>
+
+<div class="panel quickButtons">
+
+  <button class="secondary" onclick="tab('collection')">
+    📖 Collection
+  </button>
+
+  <button class="secondary" onclick="tab('history')">
+    📜 History
+  </button>
+
+  <button class="secondary" onclick="tab('missions')">
+    🎯 Missions
+  </button>
+
 </div>
 
 <div class="panel">
@@ -598,77 +744,124 @@ button:active{
   <div class="rates">
 
     <div class="rate">
-      <b class="heroText">HERO</b>
+      <b class="hero">HERO</b>
       65.00%
     </div>
 
     <div class="rate">
-      <b class="extremeText">EXTREME</b>
+      <b class="extreme">EXTREME</b>
       25.00%
     </div>
 
     <div class="rate">
-      <b class="sparkText">SPARKING</b>
+      <b class="spark">SPARKING</b>
       9.00%
     </div>
 
     <div class="rate">
-      <b class="llText">LEGEND LIMITED</b>
+      <b class="ll">LEGEND LIMITED</b>
       0.90%
     </div>
 
     <div class="rate">
-      <b class="ultraText">ULTRA</b>
+      <b class="ultra">ULTRA</b>
       0.09%
     </div>
 
     <div class="rate">
-      <b class="legendText">👑 LEGEND</b>
+      <b class="legend">👑 LEGEND</b>
       0.01%
     </div>
 
   </div>
-</div>
 
-<div class="panel tabs">
-  <button class="secondary" onclick="tab('collection')">
-    📖 Collection
-  </button>
-
-  <button class="secondary" onclick="tab('history')">
-    📜 History
-  </button>
-
-  <button class="secondary" onclick="resetSave()">
-    ♻️ Reset
-  </button>
 </div>
 
 <section id="collection" class="panel">
+
   <div class="sectionTitle">
     <h3>📖 Collection</h3>
     <small id="collectionCount"></small>
   </div>
 
   <div id="grid" class="grid"></div>
+
 </section>
 
 <section id="history" class="panel hidden">
-  <h3>📜 Summon History</h3>
+
+  <div class="sectionTitle">
+    <h3>📜 Summon History</h3>
+    <small id="pullCount"></small>
+  </div>
+
   <div id="hist"></div>
+
 </section>
+
+<section id="missions" class="panel hidden">
+
+  <h3>🎯 Missions</h3>
+
+  <div id="missionsList"></div>
+
+</section>
+
+<div class="panel dailyBox">
+
+  <h3>🎁 Daily Reward</h3>
+
+  <div id="dailyText">
+    Claim your daily Chrono Crystals!
+  </div>
+
+  <button id="dailyButton" onclick="claimDaily()">
+    CLAIM 500 CC
+  </button>
+
+</div>
+
+<section class="panel">
+
+  <div class="sectionTitle">
+    <h3>🔥 Step-Up Summon</h3>
+    <small id="stepLabel">Step 1/5</small>
+  </div>
+
+  <div id="steps"></div>
+
+</section>
+
+<div class="panel">
+
+  <button
+    class="secondary"
+    style="width:100%"
+    onclick="resetSave()"
+  >
+    ♻️ RESET ALL PROGRESS
+  </button>
+
+</div>
 
 </main>
 
-<!-- SUMMON ANIMATION -->
+
+<!-- SUMMON SCENE -->
 
 <div id="scene">
 
   <div class="space"></div>
+
   <div class="stars"></div>
+
+  <div class="gokuAura"></div>
+
   <div class="orb"></div>
+
   <div class="beam"></div>
-  <div id="legendExplosion" class="legendExplosion"></div>
+
+  <div id="special" class="special"></div>
 
   <div id="clash" class="clash">
     ENERGY<br>
@@ -677,23 +870,25 @@ button:active{
 
   <div class="flash"></div>
 
+  <div id="multiResults" class="multiple"></div>
+
   <div class="reveal">
 
     <div id="card" class="card">
 
-      <div id="rarity" class="rarity">
+      <div id="rarityText" class="rarityText">
         ★ SPARKING ★
       </div>
 
-      <div id="char" class="char">
+      <div id="characterText" class="characterText">
         Character
       </div>
 
-      <div id="element" class="element">
+      <div id="elementText" class="elementText">
         ELEMENT
       </div>
 
-      <div id="bannerResult" class="resultText">
+      <div id="resultText" class="resultText">
         Summoned!
       </div>
 
@@ -707,11 +902,52 @@ button:active{
 
 </div>
 
+<div id="toast"></div>
+
+
 <script>
 
-/* =========================
+/* =====================================================
+   V5 SAVE
+===================================================== */
+
+const DEFAULT_SAVE = {
+  cc:10000,
+  pity:0,
+  collection:{},
+  history:[],
+  totalPulls:0,
+  step:1,
+  missions:{
+    pulls10:0,
+    pulls50:0,
+    sparking:0
+  },
+  claimed:{
+    pulls10:false,
+    pulls50:false,
+    sparking:false
+  },
+  daily:""
+};
+
+let S;
+
+try{
+  S = JSON.parse(localStorage.getItem("dblv5"));
+
+  if(!S) S = structuredClone(DEFAULT_SAVE);
+
+}catch(e){
+
+  S = structuredClone(DEFAULT_SAVE);
+
+}
+
+
+/* =====================================================
    BANNERS
-========================= */
+===================================================== */
 
 const BANNERS = [
 
@@ -719,15 +955,15 @@ const BANNERS = [
     name:"LEGEND LIMITED SSB Goku",
     type:"LEGEND LIMITED",
     featured:["Super Saiyan Blue Goku"],
-    desc:"A powerful LEGEND LIMITED banner featuring SSB Goku.",
-    theme:"linear-gradient(135deg,#8b2d20,#173f94,#18092d)"
+    desc:"A powerful LEGEND LIMITED banner.",
+    theme:"linear-gradient(135deg,#8c2c20,#173f94,#18092d)"
   },
 
   {
     name:"ULTRA Beast Gohan",
     type:"ULTRA",
     featured:["Beast Gohan"],
-    desc:"A devastating ULTRA banner featuring Beast Gohan.",
+    desc:"A devastating ULTRA banner.",
     theme:"linear-gradient(135deg,#6336b0,#132e72,#090b21)"
   },
 
@@ -735,7 +971,7 @@ const BANNERS = [
     name:"👑 LEGEND Goku",
     type:"LEGEND",
     featured:["LEGEND Goku"],
-    desc:"The rarest rarity. Can you pull the legendary LEGEND?",
+    desc:"The rarest rarity in the simulator.",
     theme:"linear-gradient(135deg,#861bc2,#26105c,#090517)"
   },
 
@@ -743,7 +979,7 @@ const BANNERS = [
     name:"LEGEND LIMITED Vegito",
     type:"LEGEND LIMITED",
     featured:["Super Vegito"],
-    desc:"A fusion-focused LEGEND LIMITED banner.",
+    desc:"A fusion-focused banner.",
     theme:"linear-gradient(135deg,#175da1,#701b9c,#170d30)"
   },
 
@@ -751,7 +987,7 @@ const BANNERS = [
     name:"ULTRA Broly",
     type:"ULTRA",
     featured:["ULTRA Broly"],
-    desc:"An explosive ULTRA banner featuring Broly.",
+    desc:"An explosive ULTRA banner.",
     theme:"linear-gradient(135deg,#126044,#7c9b18,#180c2d)"
   },
 
@@ -759,38 +995,32 @@ const BANNERS = [
     name:"👑 LEGEND Gogeta",
     type:"LEGEND",
     featured:["LEGEND Gogeta"],
-    desc:"A mysterious banner containing one of the rarest characters.",
+    desc:"One of the rarest characters.",
     theme:"linear-gradient(135deg,#4613a1,#c43be5,#0b0620)"
   }
 
 ];
 
+let bannerIndex=0;
 
-/* =========================
+
+/* =====================================================
    CHARACTER DATABASE
-========================= */
-
-/*
-  rarity order:
-
-  HERO
-  EXTREME
-  SPARKING
-  LEGEND LIMITED
-  ULTRA
-  LEGEND
-*/
+===================================================== */
 
 const R = [
 
   ["HERO","Saibaman","RED",-1],
   ["HERO","Cell Jr.","PURPLE",-1],
   ["HERO","Frieza Soldier","BLUE",-1],
+  ["HERO","Yamcha","GREEN",-1],
+  ["HERO","Chiaotzu","RED",-1],
 
   ["EXTREME","Trunks (Teen)","BLUE",-1],
   ["EXTREME","Piccolo","GREEN",-1],
   ["EXTREME","Krillin","YELLOW",-1],
   ["EXTREME","Android 18","RED",-1],
+  ["EXTREME","Goten","PURPLE",-1],
 
   ["SPARKING","Super Vegito","PURPLE",3],
   ["SPARKING","Gohan (Youth)","YELLOW",-1],
@@ -798,10 +1028,12 @@ const R = [
   ["SPARKING","Piccolo","GREEN",-1],
   ["SPARKING","Super Saiyan God Goku","RED",-1],
   ["SPARKING","Golden Frieza","YELLOW",-1],
+  ["SPARKING","Future Trunks","BLUE",-1],
 
   ["LEGEND LIMITED","Super Saiyan Blue Goku","BLUE",0],
   ["LEGEND LIMITED","Super Vegito","PURPLE",3],
   ["LEGEND LIMITED","Future Gohan","YELLOW",-1],
+  ["LEGEND LIMITED","Gogeta","BLUE",-1],
 
   ["ULTRA","Beast Gohan","PURPLE",1],
   ["ULTRA","ULTRA Broly","GREEN",4],
@@ -809,68 +1041,135 @@ const R = [
   ["ULTRA","ULTRA Goku","RED",-1],
 
   ["LEGEND","LEGEND Goku","BLUE",2],
-  ["LEGEND","LEGEND Gogeta","YELLOW",5]
+  ["LEGEND","LEGEND Gogeta","YELLOW",5],
+  ["LEGEND","LEGEND Vegeta","RED",-1]
 
 ];
 
 
-/* =========================
-   SAVE DATA
-========================= */
-
-const defaultSave = {
-  cc:10000,
-  pity:0,
-  collection:{},
-  history:[]
-};
-
-let S;
-
-try{
-  S = JSON.parse(localStorage.getItem("dblv4")) || defaultSave;
-}catch(e){
-  S = defaultSave;
-}
-
-let bannerIndex = 0;
-
-
-/* =========================
+/* =====================================================
    HELPERS
-========================= */
+===================================================== */
 
-const $ = id => document.getElementById(id);
+const $=id=>document.getElementById(id);
 
 function save(){
-  localStorage.setItem("dblv4",JSON.stringify(S));
+  localStorage.setItem("dblv5",JSON.stringify(S));
 }
 
-function rarityClass(rarity){
+function toast(text){
 
-  if(rarity==="LEGEND") return "legend";
-  if(rarity==="ULTRA") return "ultra";
-  if(rarity==="LEGEND LIMITED") return "ll";
-  if(rarity==="SPARKING") return "sparking";
-  if(rarity==="EXTREME") return "extreme";
+  const t=$("toast");
+
+  t.textContent=text;
+  t.classList.add("show");
+
+  clearTimeout(window.toastTimer);
+
+  window.toastTimer=setTimeout(()=>{
+    t.classList.remove("show");
+  },1800);
+}
+
+function rarityClass(r){
+
+  if(r==="LEGEND") return "legend";
+  if(r==="ULTRA") return "ultra";
+  if(r==="LEGEND LIMITED") return "ll";
+  if(r==="SPARKING") return "sparking";
+  if(r==="EXTREME") return "extreme";
 
   return "hero";
 }
 
+function rarityRank(r){
 
-/* =========================
-   BANNER DISPLAY
-========================= */
+  return {
+    HERO:1,
+    EXTREME:2,
+    SPARKING:3,
+    "LEGEND LIMITED":4,
+    ULTRA:5,
+    LEGEND:6
+  }[r] || 0;
+}
+
+function indexesFor(rarity){
+
+  return R
+    .map((x,i)=>x[0]===rarity?i:-1)
+    .filter(i=>i>=0);
+}
+
+function randomFrom(arr){
+
+  return arr[Math.floor(Math.random()*arr.length)];
+}
+
+
+/* =====================================================
+   AUDIO
+===================================================== */
+
+let audioContext=null;
+
+function sound(type){
+
+  try{
+
+    if(!audioContext)
+      audioContext=new (window.AudioContext||window.webkitAudioContext)();
+
+    const osc=audioContext.createOscillator();
+    const gain=audioContext.createGain();
+
+    osc.connect(gain);
+    gain.connect(audioContext.destination);
+
+    const now=audioContext.currentTime;
+
+    if(type==="charge"){
+      osc.frequency.setValueAtTime(180,now);
+      osc.frequency.exponentialRampToValueAtTime(700,now+.8);
+      gain.gain.setValueAtTime(.001,now);
+      gain.gain.exponentialRampToValueAtTime(.15,now+.1);
+      gain.gain.exponentialRampToValueAtTime(.001,now+.9);
+    }
+
+    if(type==="clash"){
+      osc.frequency.setValueAtTime(80,now);
+      osc.frequency.exponentialRampToValueAtTime(900,now+.15);
+      gain.gain.setValueAtTime(.18,now);
+      gain.gain.exponentialRampToValueAtTime(.001,now+.3);
+    }
+
+    if(type==="legend"){
+      osc.frequency.setValueAtTime(220,now);
+      osc.frequency.exponentialRampToValueAtTime(1200,now+1);
+      gain.gain.setValueAtTime(.001,now);
+      gain.gain.exponentialRampToValueAtTime(.22,now+.1);
+      gain.gain.exponentialRampToValueAtTime(.001,now+1.2);
+    }
+
+    osc.start(now);
+    osc.stop(now+1.3);
+
+  }catch(e){}
+}
+
+
+/* =====================================================
+   BANNER
+===================================================== */
 
 function renderBanner(){
 
-  const b = BANNERS[bannerIndex];
+  const b=BANNERS[bannerIndex];
 
-  const el = $("banner");
+  $("banner").style.background=b.theme;
 
-  el.style.background = b.theme;
+  $("banner").innerHTML=`
 
-  el.innerHTML = `
     <div class="bannerContent">
 
       <span class="tag">
@@ -882,501 +1181,748 @@ function renderBanner(){
       <p>${b.desc}</p>
 
       <div class="featured">
-        Featured:
+        ⭐ Featured:
         <b>${b.featured.join(" • ")}</b>
       </div>
 
     </div>
+
   `;
 
-  $("dots").innerHTML = BANNERS.map((_,i)=>`
+  $("dots").innerHTML=BANNERS.map((_,i)=>`
     <span class="dot ${i===bannerIndex?"on":""}"></span>
   `).join("");
 }
 
-function changeBanner(direction){
+function changeBanner(dir){
 
-  bannerIndex =
-    (bannerIndex + direction + BANNERS.length)
-    % BANNERS.length;
+  bannerIndex=
+    (bannerIndex+dir+BANNERS.length)
+    %BANNERS.length;
 
   renderBanner();
 }
 
 
-/* =========================
-   UI UPDATE
-========================= */
-
-function update(){
-
-  $("cc").textContent =
-    Number(S.cc).toLocaleString();
-
-  $("pity").textContent = S.pity;
-
-  const owned = Object.keys(S.collection).length;
-
-  $("collectionCount").textContent =
-    `${owned}/${R.length}`;
-
-  if(!owned){
-
-    $("grid").innerHTML =
-      `<div class="empty">No characters yet. Summon to start your collection!</div>`;
-
-  }else{
-
-    $("grid").innerHTML =
-      Object.keys(S.collection)
-      .sort((a,b)=>Number(a)-Number(b))
-      .map(i=>{
-
-        const c = R[i];
-
-        return `
-          <div class="unit">
-
-            <span class="rarityBadge">
-              ${c[0]}
-            </span>
-
-            <b>${c[1]}</b>
-
-            <small>
-              ${c[2]} • ×${S.collection[i]}
-            </small>
-
-          </div>
-        `;
-
-      }).join("");
-  }
-
-
-  if(!S.history.length){
-
-    $("hist").innerHTML =
-      `<div class="empty">No summons yet.</div>`;
-
-  }else{
-
-    $("hist").innerHTML =
-      S.history.map(x=>`
-
-        <div class="unit">
-
-          <span class="rarityBadge">
-            ${x.rarity}
-          </span>
-
-          <b>${x.name}</b>
-
-          <small>
-            ${x.banner} • ${x.time}
-          </small>
-
-        </div>
-
-      `).join("");
-  }
-}
-
-
-/* =========================
-   CHARACTER POOLS
-========================= */
-
-function indexesFor(rarity){
-
-  return R
-    .map((x,i)=>x[0]===rarity ? i : -1)
-    .filter(i=>i>=0);
-}
-
-function randomFrom(list){
-
-  return list[
-    Math.floor(Math.random()*list.length)
-  ];
-}
-
-
-/* =========================
+/* =====================================================
    FEATURED
-========================= */
+===================================================== */
 
 function featuredIndexes(){
 
-  const featured =
-    BANNERS[bannerIndex].featured;
+  const names=BANNERS[bannerIndex].featured;
 
   return R
-    .map((x,i)=>
-      featured.includes(x[1]) ? i : -1
-    )
+    .map((x,i)=>names.includes(x[1])?i:-1)
     .filter(i=>i>=0);
 }
 
 
-/* =========================
-   SUMMON ENGINE
-========================= */
+/* =====================================================
+   PULL ENGINE
+===================================================== */
 
 function pull(){
 
   S.pity++;
 
-  const featured = featuredIndexes();
+  const featured=featuredIndexes();
 
-  /*
-    50 pity:
-    guaranteed featured high-rarity character.
-  */
+  if(S.pity>=50){
 
-  if(S.pity >= 50){
+    S.pity=0;
 
-    S.pity = 0;
-
-    if(featured.length){
-
+    if(featured.length)
       return randomFrom(featured);
-
-    }
   }
 
+  const roll=Math.random()*100;
 
-  const roll = Math.random()*100;
-
-  /*
-    RARITY RATES
-
-    HERO            65.00%
-    EXTREME         25.00%
-    SPARKING         9.00%
-    LEGEND LIMITED   0.90%
-    ULTRA            0.09%
-    LEGEND           0.01%
-  */
-
-
-  if(roll < 0.01){
-
+  if(roll<.01)
     return randomFrom(indexesFor("LEGEND"));
 
-  }
-
-  if(roll < 0.10){
-
+  if(roll<.10)
     return randomFrom(indexesFor("ULTRA"));
 
-  }
-
-  if(roll < 1.00){
-
+  if(roll<1)
     return randomFrom(indexesFor("LEGEND LIMITED"));
 
-  }
-
-  if(roll < 10.00){
-
+  if(roll<10)
     return randomFrom(indexesFor("SPARKING"));
 
-  }
-
-  if(roll < 35.00){
-
+  if(roll<35)
     return randomFrom(indexesFor("EXTREME"));
-
-  }
 
   return randomFrom(indexesFor("HERO"));
 }
 
+function guaranteedHigh(){
 
-/* =========================
-   GUARANTEED SPARKING
-========================= */
-
-function guaranteedSparking(){
-
-  const highPool = [
+  return randomFrom([
     ...indexesFor("SPARKING"),
     ...indexesFor("LEGEND LIMITED"),
     ...indexesFor("ULTRA"),
     ...indexesFor("LEGEND")
-  ];
-
-  return randomFrom(highPool);
+  ]);
 }
 
 
-/* =========================
+/* =====================================================
    SUMMON
-========================= */
+===================================================== */
 
 function summon(amount){
 
-  const cost =
-    amount===1 ? 100 : 1000;
+  const cost=amount===1?100:1000;
 
-  if(S.cc < cost){
+  if(S.cc<cost){
 
-    alert("Not enough Chrono Crystals!");
+    toast("❌ Not enough Chrono Crystals!");
 
     return;
   }
 
-  S.cc -= cost;
+  sound("charge");
 
-  const results = [];
+  S.cc-=cost;
+
+  const results=[];
 
   for(let i=0;i<amount;i++){
 
-    let p = pull();
-
-    /*
-      Last slot of a ×10:
-      guaranteed SPARKING or higher.
-    */
+    let p=pull();
 
     if(amount===10 && i===9){
 
-      const rarity = R[p][0];
-
-      if(
-        rarity==="HERO" ||
-        rarity==="EXTREME"
-      ){
-
-        p = guaranteedSparking();
-      }
+      if(rarityRank(R[p][0])<3)
+        p=guaranteedHigh();
     }
 
     results.push(p);
 
-    S.collection[p] =
-      (S.collection[p] || 0) + 1;
+    S.collection[p]=
+      (S.collection[p]||0)+1;
   }
 
+  S.totalPulls+=amount;
 
-  const bannerName =
-    BANNERS[bannerIndex].name;
-
-  const now =
-    new Date().toLocaleString();
-
-
-  /*
-    Add all results to history.
-  */
+  S.missions.pulls10+=amount;
+  S.missions.pulls50+=amount;
 
   results.forEach(p=>{
+
+    if(rarityRank(R[p][0])>=3)
+      S.missions.sparking++;
 
     S.history.unshift({
 
       name:R[p][1],
-
       rarity:R[p][0],
-
-      banner:bannerName,
-
-      time:now
+      element:R[p][2],
+      banner:BANNERS[bannerIndex].name,
+      time:new Date().toLocaleString()
 
     });
 
   });
 
-
-  /*
-    Keep the latest 100 results.
-  */
-
-  S.history =
-    S.history.slice(0,100);
-
+  S.history=S.history.slice(0,150);
 
   save();
   update();
 
-
-  /*
-    Show the LAST result.
-  */
-
-  showSummonScene(
-    results[results.length-1],
-    bannerName
-  );
+  showScene(results, BANNERS[bannerIndex].name);
 }
 
 
-/* =========================
-   SUMMON ANIMATION
-========================= */
+/* =====================================================
+   SUMMON SCENE
+===================================================== */
 
-function showSummonScene(index,bannerName){
+function showScene(results,bannerName){
 
-  const scene = $("scene");
+  const scene=$("scene");
 
-  const rr = R[index];
+  scene.style.display="block";
 
-  scene.style.display = "block";
-
-  /*
-    Reset animation elements by cloning.
-  */
-
-  const oldScene = scene;
-
-  oldScene.querySelector(".beam").style.animation = "none";
-  oldScene.querySelector(".flash").style.animation = "none";
-  oldScene.querySelector(".orb").style.animation = "none";
-
-  void oldScene.offsetWidth;
-
-  oldScene.querySelector(".beam").style.animation =
-    "beam .7s 1.25s forwards";
-
-  oldScene.querySelector(".flash").style.animation =
-    "flash .3s 2.65s forwards";
-
-  oldScene.querySelector(".orb").style.animation =
-    "pulse .35s infinite alternate";
-
-
-  $("clash").innerHTML =
+  $("clash").innerHTML=
     "ENERGY<br>CHARGING...";
 
+  $("special").className="special";
 
-  $("legendExplosion").classList.remove("active");
+  $("multiResults").innerHTML="";
 
+  const last=results[results.length-1];
+
+  const rr=R[last];
+
+  const strongest=
+    results.reduce((best,p)=>
+      rarityRank(R[p][0])>
+      rarityRank(R[best][0])?p:best,
+      results[0]
+    );
+
+  const final=R[strongest];
+
+  $("card").className=
+    "card "+rarityClass(final[0]);
+
+  $("rarityText").textContent=
+    `★ ${final[0]} ★`;
+
+  $("characterText").textContent=
+    final[1];
+
+  $("elementText").textContent=
+    `ELEMENT: ${final[2]}`;
+
+  const featured=final[3]===bannerIndex;
+
+  $("resultText").textContent=
+    featured
+      ?"⭐ FEATURED CHARACTER!"
+      :`Summoned from ${bannerName}`;
 
   setTimeout(()=>{
-
-    $("clash").innerHTML =
-      "💥 CLASH!";
-
+    $("clash").innerHTML="⚡ POWER UP!";
+    sound("clash");
   },850);
 
+  setTimeout(()=>{
+    $("clash").innerHTML="💥 CLASH!";
+  },1450);
 
   setTimeout(()=>{
 
-    $("clash").innerHTML =
-      "🔥 TRANSFORMATION!";
+    if(final[0]==="LEGEND"){
 
-  },1600);
-
-
-  /*
-    LEGEND gets a special moment.
-  */
-
-  if(rr[0]==="LEGEND"){
-
-    setTimeout(()=>{
-
-      $("clash").innerHTML =
+      $("clash").innerHTML=
         "👑 LEGENDARY<br>POWER!";
 
-      $("legendExplosion")
-        .classList.add("active");
+      $("special").className=
+        "special legendBurst";
 
-    },2150);
+      sound("legend");
+
+    }else if(final[0]==="ULTRA"){
+
+      $("clash").innerHTML=
+        "🔥 ULTRA<br>POWER!";
+
+    }else if(final[0]==="LEGEND LIMITED"){
+
+      $("clash").innerHTML=
+        "✨ LEGEND LIMITED!";
+
+    }else{
+
+      $("clash").innerHTML=
+        "✨ REVEAL!";
+    }
+
+  },2200);
+
+  if(results.length>1){
+
+    $("multiResults").innerHTML=
+      results.map(p=>{
+
+        const x=R[p];
+
+        return `
+          <span>
+            ${x[0]} • ${x[1]}
+          </span>
+        `;
+
+      }).join("");
 
   }
-
-
-  setTimeout(()=>{
-
-    $("rarity").textContent =
-      `★ ${rr[0]} ★`;
-
-    $("char").textContent =
-      rr[1];
-
-    $("element").textContent =
-      `ELEMENT: ${rr[2]}`;
-
-    const isFeatured =
-      rr[3] === bannerIndex;
-
-    $("bannerResult").textContent =
-      isFeatured
-        ? "⭐ FEATURED CHARACTER!"
-        : `Summoned from ${bannerName}`;
-
-
-    $("card").className =
-      "card " + rarityClass(rr[0]);
-
-
-  },3000);
 }
-
-
-/* =========================
-   CLOSE
-========================= */
 
 function closeScene(){
 
-  $("scene").style.display =
-    "none";
+  $("scene").style.display="none";
 
   update();
 }
 
 
-/* =========================
-   TABS
-========================= */
+/* =====================================================
+   COLLECTION
+===================================================== */
 
-function tab(name){
+function renderCollection(){
 
-  $("collection")
-    .classList
-    .toggle(
-      "hidden",
-      name!=="collection"
+  const owned=Object.keys(S.collection).length;
+
+  $("collectionCount").textContent=
+    `${owned}/${R.length}`;
+
+  if(!owned){
+
+    $("grid").innerHTML=
+      `<div class="empty">
+        No characters yet. Summon to begin!
+      </div>`;
+
+    return;
+  }
+
+  const ids=Object.keys(S.collection)
+    .sort((a,b)=>
+      rarityRank(R[b][0])-
+      rarityRank(R[a][0])
     );
 
-  $("history")
-    .classList
-    .toggle(
-      "hidden",
-      name!=="history"
-    );
+  $("grid").innerHTML=ids.map(i=>{
+
+    const c=R[i];
+
+    return `
+      <div class="unit">
+
+        <span class="badge">
+          ${c[0]}
+        </span>
+
+        <b>${c[1]}</b>
+
+        <small>
+          ${c[2]} • ×${S.collection[i]}
+        </small>
+
+      </div>
+    `;
+
+  }).join("");
 }
 
 
-/* =========================
+/* =====================================================
+   HISTORY
+===================================================== */
+
+function renderHistory(){
+
+  $("pullCount").textContent=
+    `${S.totalPulls} pulls`;
+
+  if(!S.history.length){
+
+    $("hist").innerHTML=
+      `<div class="empty">No summons yet.</div>`;
+
+    return;
+  }
+
+  $("hist").innerHTML=
+    S.history.slice(0,50).map(x=>`
+
+      <div class="unit">
+
+        <span class="badge">
+          ${x.rarity}
+        </span>
+
+        <b>${x.name}</b>
+
+        <small>
+          ${x.element} • ${x.banner}<br>
+          ${x.time}
+        </small>
+
+      </div>
+
+    `).join("");
+}
+
+
+/* =====================================================
+   MISSIONS
+===================================================== */
+
+const MISSIONS=[
+
+  {
+    id:"pulls10",
+    title:"Make 10 summons",
+    target:10,
+    reward:500
+  },
+
+  {
+    id:"pulls50",
+    title:"Make 50 summons",
+    target:50,
+    reward:1500
+  },
+
+  {
+    id:"sparking",
+    title:"Pull 10 SPARKING or higher",
+    target:10,
+    reward:2000
+  }
+
+];
+
+function renderMissions(){
+
+  $("missionsList").innerHTML=
+    MISSIONS.map(m=>{
+
+      const progress=
+        Math.min(S.missions[m.id],m.target);
+
+      const percent=
+        progress/m.target*100;
+
+      const done=S.claimed[m.id];
+
+      return `
+
+        <div class="mission">
+
+          <div class="missionTop">
+
+            <span>${m.title}</span>
+
+            <span>
+              ${progress}/${m.target}
+            </span>
+
+          </div>
+
+          <div class="progress">
+            <div style="width:${percent}%"></div>
+          </div>
+
+          <small>
+            Reward: 💎 ${m.reward.toLocaleString()} CC
+          </small>
+
+          <button
+            class="${done?"claimed":""}"
+            onclick="claimMission('${m.id}')"
+            ${done?"disabled":""}
+          >
+            ${done?"CLAIMED":
+              progress>=m.target?"CLAIM REWARD":"IN PROGRESS"}
+          </button>
+
+        </div>
+
+      `;
+
+    }).join("");
+}
+
+function claimMission(id){
+
+  const m=MISSIONS.find(x=>x.id===id);
+
+  if(!m || S.claimed[id])
+    return;
+
+  if(S.missions[id]<m.target){
+
+    toast("Mission not completed yet!");
+
+    return;
+  }
+
+  S.cc+=m.reward;
+
+  S.claimed[id]=true;
+
+  save();
+  update();
+
+  toast(`🎁 +${m.reward.toLocaleString()} CC!`);
+}
+
+
+/* =====================================================
+   DAILY REWARD
+===================================================== */
+
+function todayKey(){
+
+  const d=new Date();
+
+  return [
+    d.getFullYear(),
+    d.getMonth()+1,
+    d.getDate()
+  ].join("-");
+}
+
+function renderDaily(){
+
+  const claimed=S.daily===todayKey();
+
+  $("dailyButton").disabled=claimed;
+
+  $("dailyButton").textContent=
+    claimed
+      ?"CLAIMED TODAY"
+      :"CLAIM 500 CC";
+
+  $("dailyText").textContent=
+    claimed
+      ?"Come back tomorrow for another reward!"
+      :"Your daily reward is ready!";
+}
+
+function claimDaily(){
+
+  if(S.daily===todayKey()){
+
+    toast("Already claimed today!");
+
+    return;
+  }
+
+  S.cc+=500;
+
+  S.daily=todayKey();
+
+  save();
+  update();
+
+  toast("🎁 +500 Chrono Crystals!");
+}
+
+
+/* =====================================================
+   STEP-UP
+===================================================== */
+
+const STEPS=[
+
+  {
+    n:1,
+    cost:500,
+    desc:"Guaranteed SPARKING or higher"
+  },
+
+  {
+    n:2,
+    cost:700,
+    desc:"Higher chance for LEGEND LIMITED"
+  },
+
+  {
+    n:3,
+    cost:1000,
+    desc:"Guaranteed LEGEND LIMITED or higher"
+  },
+
+  {
+    n:4,
+    cost:1200,
+    desc:"Guaranteed ULTRA or higher"
+  },
+
+  {
+    n:5,
+    cost:1500,
+    desc:"Guaranteed 👑 LEGEND"
+  }
+
+];
+
+function renderSteps(){
+
+  $("stepLabel").textContent=
+    `Step ${S.step}/5`;
+
+  $("steps").innerHTML=
+    STEPS.map(step=>{
+
+      const active=S.step===step.n;
+      const locked=step.n<S.step;
+      const disabled=step.n!==S.step;
+
+      return `
+
+        <div class="step ${active?"active":""}">
+
+          <b>
+            Step ${step.n}
+            ${step.n===5?" 👑":""}
+          </b>
+
+          <small>${step.desc}</small>
+
+          ${
+            locked
+            ?`<small>✓ COMPLETED</small>`
+            :`
+              <button
+                onclick="stepSummon(${step.n})"
+                ${disabled?"disabled":""}
+              >
+                SUMMON • ${step.cost.toLocaleString()} CC
+              </button>
+            `
+          }
+
+        </div>
+
+      `;
+
+    }).join("");
+}
+
+function stepSummon(stepNumber){
+
+  const step=STEPS.find(x=>x.n===stepNumber);
+
+  if(!step || S.step!==stepNumber)
+    return;
+
+  if(S.cc<step.cost){
+
+    toast("❌ Not enough Chrono Crystals!");
+
+    return;
+  }
+
+  S.cc-=step.cost;
+
+  let p;
+
+  if(stepNumber===1){
+
+    p=guaranteedHigh();
+
+  }else if(stepNumber===2){
+
+    p=Math.random()<.2
+      ?randomFrom(indexesFor("LEGEND LIMITED"))
+      :guaranteedHigh();
+
+  }else if(stepNumber===3){
+
+    p=randomFrom([
+      ...indexesFor("LEGEND LIMITED"),
+      ...indexesFor("ULTRA"),
+      ...indexesFor("LEGEND")
+    ]);
+
+  }else if(stepNumber===4){
+
+    p=randomFrom([
+      ...indexesFor("ULTRA"),
+      ...indexesFor("LEGEND")
+    ]);
+
+  }else{
+
+    p=randomFrom(indexesFor("LEGEND"));
+
+  }
+
+  S.collection[p]=(S.collection[p]||0)+1;
+
+  S.totalPulls++;
+
+  S.history.unshift({
+
+    name:R[p][1],
+    rarity:R[p][0],
+    element:R[p][2],
+    banner:"V5 STEP-UP",
+    time:new Date().toLocaleString()
+
+  });
+
+  S.history=S.history.slice(0,150);
+
+  S.step=stepNumber===5?1:stepNumber+1;
+
+  save();
+  update();
+
+  showScene([p],"V5 STEP-UP");
+}
+
+
+/* =====================================================
+   TABS
+===================================================== */
+
+function tab(name){
+
+  $("collection").classList.toggle(
+    "hidden",
+    name!=="collection"
+  );
+
+  $("history").classList.toggle(
+    "hidden",
+    name!=="history"
+  );
+
+  $("missions").classList.toggle(
+    "hidden",
+    name!=="missions"
+  );
+
+  window.scrollTo({
+    top:document.body.scrollHeight,
+    behavior:"smooth"
+  });
+}
+
+
+/* =====================================================
    RESET
-========================= */
+===================================================== */
 
 function resetSave(){
 
   if(!confirm(
-    "Reset all progress?\n\nThis will remove your CC, collection and summon history."
+    "RESET EVERYTHING?\n\nCC, collection, missions, history and step-up progress will be deleted."
   )){
     return;
   }
 
-  S = {
-    cc:10000,
-    pity:0,
-    collection:{},
-    history:[]
-  };
+  S=structuredClone(DEFAULT_SAVE);
 
   save();
   update();
+
+  toast("Progress reset!");
 }
 
 
-/* =========================
+/* =====================================================
+   UPDATE
+===================================================== */
+
+function update(){
+
+  $("cc").textContent=
+    Number(S.cc).toLocaleString();
+
+  $("pity").textContent=
+    S.pity;
+
+  renderCollection();
+  renderHistory();
+  renderMissions();
+  renderDaily();
+  renderSteps();
+}
+
+
+/* =====================================================
    START
-========================= */
+===================================================== */
 
 renderBanner();
 update();
