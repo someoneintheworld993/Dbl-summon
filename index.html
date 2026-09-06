@@ -608,4 +608,780 @@ button:active{
     </div>
 
     <div class="rate">
-      <b class="sparkText">SPARKING
+      <b class="sparkText">SPARKING</b>
+      9.00%
+    </div>
+
+    <div class="rate">
+      <b class="llText">LEGEND LIMITED</b>
+      0.90%
+    </div>
+
+    <div class="rate">
+      <b class="ultraText">ULTRA</b>
+      0.09%
+    </div>
+
+    <div class="rate">
+      <b class="legendText">👑 LEGEND</b>
+      0.01%
+    </div>
+
+  </div>
+</div>
+
+<div class="panel tabs">
+  <button class="secondary" onclick="tab('collection')">
+    📖 Collection
+  </button>
+
+  <button class="secondary" onclick="tab('history')">
+    📜 History
+  </button>
+
+  <button class="secondary" onclick="resetSave()">
+    ♻️ Reset
+  </button>
+</div>
+
+<section id="collection" class="panel">
+  <div class="sectionTitle">
+    <h3>📖 Collection</h3>
+    <small id="collectionCount"></small>
+  </div>
+
+  <div id="grid" class="grid"></div>
+</section>
+
+<section id="history" class="panel hidden">
+  <h3>📜 Summon History</h3>
+  <div id="hist"></div>
+</section>
+
+</main>
+
+<!-- SUMMON ANIMATION -->
+
+<div id="scene">
+
+  <div class="space"></div>
+  <div class="stars"></div>
+  <div class="orb"></div>
+  <div class="beam"></div>
+  <div id="legendExplosion" class="legendExplosion"></div>
+
+  <div id="clash" class="clash">
+    ENERGY<br>
+    CHARGING...
+  </div>
+
+  <div class="flash"></div>
+
+  <div class="reveal">
+
+    <div id="card" class="card">
+
+      <div id="rarity" class="rarity">
+        ★ SPARKING ★
+      </div>
+
+      <div id="char" class="char">
+        Character
+      </div>
+
+      <div id="element" class="element">
+        ELEMENT
+      </div>
+
+      <div id="bannerResult" class="resultText">
+        Summoned!
+      </div>
+
+      <button class="close" onclick="closeScene()">
+        CONTINUE
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+/* =========================
+   BANNERS
+========================= */
+
+const BANNERS = [
+
+  {
+    name:"LEGEND LIMITED SSB Goku",
+    type:"LEGEND LIMITED",
+    featured:["Super Saiyan Blue Goku"],
+    desc:"A powerful LEGEND LIMITED banner featuring SSB Goku.",
+    theme:"linear-gradient(135deg,#8b2d20,#173f94,#18092d)"
+  },
+
+  {
+    name:"ULTRA Beast Gohan",
+    type:"ULTRA",
+    featured:["Beast Gohan"],
+    desc:"A devastating ULTRA banner featuring Beast Gohan.",
+    theme:"linear-gradient(135deg,#6336b0,#132e72,#090b21)"
+  },
+
+  {
+    name:"👑 LEGEND Goku",
+    type:"LEGEND",
+    featured:["LEGEND Goku"],
+    desc:"The rarest rarity. Can you pull the legendary LEGEND?",
+    theme:"linear-gradient(135deg,#861bc2,#26105c,#090517)"
+  },
+
+  {
+    name:"LEGEND LIMITED Vegito",
+    type:"LEGEND LIMITED",
+    featured:["Super Vegito"],
+    desc:"A fusion-focused LEGEND LIMITED banner.",
+    theme:"linear-gradient(135deg,#175da1,#701b9c,#170d30)"
+  },
+
+  {
+    name:"ULTRA Broly",
+    type:"ULTRA",
+    featured:["ULTRA Broly"],
+    desc:"An explosive ULTRA banner featuring Broly.",
+    theme:"linear-gradient(135deg,#126044,#7c9b18,#180c2d)"
+  },
+
+  {
+    name:"👑 LEGEND Gogeta",
+    type:"LEGEND",
+    featured:["LEGEND Gogeta"],
+    desc:"A mysterious banner containing one of the rarest characters.",
+    theme:"linear-gradient(135deg,#4613a1,#c43be5,#0b0620)"
+  }
+
+];
+
+
+/* =========================
+   CHARACTER DATABASE
+========================= */
+
+/*
+  rarity order:
+
+  HERO
+  EXTREME
+  SPARKING
+  LEGEND LIMITED
+  ULTRA
+  LEGEND
+*/
+
+const R = [
+
+  ["HERO","Saibaman","RED",-1],
+  ["HERO","Cell Jr.","PURPLE",-1],
+  ["HERO","Frieza Soldier","BLUE",-1],
+
+  ["EXTREME","Trunks (Teen)","BLUE",-1],
+  ["EXTREME","Piccolo","GREEN",-1],
+  ["EXTREME","Krillin","YELLOW",-1],
+  ["EXTREME","Android 18","RED",-1],
+
+  ["SPARKING","Super Vegito","PURPLE",3],
+  ["SPARKING","Gohan (Youth)","YELLOW",-1],
+  ["SPARKING","Super Saiyan 3 Goku","PURPLE",-1],
+  ["SPARKING","Piccolo","GREEN",-1],
+  ["SPARKING","Super Saiyan God Goku","RED",-1],
+  ["SPARKING","Golden Frieza","YELLOW",-1],
+
+  ["LEGEND LIMITED","Super Saiyan Blue Goku","BLUE",0],
+  ["LEGEND LIMITED","Super Vegito","PURPLE",3],
+  ["LEGEND LIMITED","Future Gohan","YELLOW",-1],
+
+  ["ULTRA","Beast Gohan","PURPLE",1],
+  ["ULTRA","ULTRA Broly","GREEN",4],
+  ["ULTRA","ULTRA Gogeta","BLUE",-1],
+  ["ULTRA","ULTRA Goku","RED",-1],
+
+  ["LEGEND","LEGEND Goku","BLUE",2],
+  ["LEGEND","LEGEND Gogeta","YELLOW",5]
+
+];
+
+
+/* =========================
+   SAVE DATA
+========================= */
+
+const defaultSave = {
+  cc:10000,
+  pity:0,
+  collection:{},
+  history:[]
+};
+
+let S;
+
+try{
+  S = JSON.parse(localStorage.getItem("dblv4")) || defaultSave;
+}catch(e){
+  S = defaultSave;
+}
+
+let bannerIndex = 0;
+
+
+/* =========================
+   HELPERS
+========================= */
+
+const $ = id => document.getElementById(id);
+
+function save(){
+  localStorage.setItem("dblv4",JSON.stringify(S));
+}
+
+function rarityClass(rarity){
+
+  if(rarity==="LEGEND") return "legend";
+  if(rarity==="ULTRA") return "ultra";
+  if(rarity==="LEGEND LIMITED") return "ll";
+  if(rarity==="SPARKING") return "sparking";
+  if(rarity==="EXTREME") return "extreme";
+
+  return "hero";
+}
+
+
+/* =========================
+   BANNER DISPLAY
+========================= */
+
+function renderBanner(){
+
+  const b = BANNERS[bannerIndex];
+
+  const el = $("banner");
+
+  el.style.background = b.theme;
+
+  el.innerHTML = `
+    <div class="bannerContent">
+
+      <span class="tag">
+        ${b.type} BANNER
+      </span>
+
+      <h2>${b.name}</h2>
+
+      <p>${b.desc}</p>
+
+      <div class="featured">
+        Featured:
+        <b>${b.featured.join(" • ")}</b>
+      </div>
+
+    </div>
+  `;
+
+  $("dots").innerHTML = BANNERS.map((_,i)=>`
+    <span class="dot ${i===bannerIndex?"on":""}"></span>
+  `).join("");
+}
+
+function changeBanner(direction){
+
+  bannerIndex =
+    (bannerIndex + direction + BANNERS.length)
+    % BANNERS.length;
+
+  renderBanner();
+}
+
+
+/* =========================
+   UI UPDATE
+========================= */
+
+function update(){
+
+  $("cc").textContent =
+    Number(S.cc).toLocaleString();
+
+  $("pity").textContent = S.pity;
+
+  const owned = Object.keys(S.collection).length;
+
+  $("collectionCount").textContent =
+    `${owned}/${R.length}`;
+
+  if(!owned){
+
+    $("grid").innerHTML =
+      `<div class="empty">No characters yet. Summon to start your collection!</div>`;
+
+  }else{
+
+    $("grid").innerHTML =
+      Object.keys(S.collection)
+      .sort((a,b)=>Number(a)-Number(b))
+      .map(i=>{
+
+        const c = R[i];
+
+        return `
+          <div class="unit">
+
+            <span class="rarityBadge">
+              ${c[0]}
+            </span>
+
+            <b>${c[1]}</b>
+
+            <small>
+              ${c[2]} • ×${S.collection[i]}
+            </small>
+
+          </div>
+        `;
+
+      }).join("");
+  }
+
+
+  if(!S.history.length){
+
+    $("hist").innerHTML =
+      `<div class="empty">No summons yet.</div>`;
+
+  }else{
+
+    $("hist").innerHTML =
+      S.history.map(x=>`
+
+        <div class="unit">
+
+          <span class="rarityBadge">
+            ${x.rarity}
+          </span>
+
+          <b>${x.name}</b>
+
+          <small>
+            ${x.banner} • ${x.time}
+          </small>
+
+        </div>
+
+      `).join("");
+  }
+}
+
+
+/* =========================
+   CHARACTER POOLS
+========================= */
+
+function indexesFor(rarity){
+
+  return R
+    .map((x,i)=>x[0]===rarity ? i : -1)
+    .filter(i=>i>=0);
+}
+
+function randomFrom(list){
+
+  return list[
+    Math.floor(Math.random()*list.length)
+  ];
+}
+
+
+/* =========================
+   FEATURED
+========================= */
+
+function featuredIndexes(){
+
+  const featured =
+    BANNERS[bannerIndex].featured;
+
+  return R
+    .map((x,i)=>
+      featured.includes(x[1]) ? i : -1
+    )
+    .filter(i=>i>=0);
+}
+
+
+/* =========================
+   SUMMON ENGINE
+========================= */
+
+function pull(){
+
+  S.pity++;
+
+  const featured = featuredIndexes();
+
+  /*
+    50 pity:
+    guaranteed featured high-rarity character.
+  */
+
+  if(S.pity >= 50){
+
+    S.pity = 0;
+
+    if(featured.length){
+
+      return randomFrom(featured);
+
+    }
+  }
+
+
+  const roll = Math.random()*100;
+
+  /*
+    RARITY RATES
+
+    HERO            65.00%
+    EXTREME         25.00%
+    SPARKING         9.00%
+    LEGEND LIMITED   0.90%
+    ULTRA            0.09%
+    LEGEND           0.01%
+  */
+
+
+  if(roll < 0.01){
+
+    return randomFrom(indexesFor("LEGEND"));
+
+  }
+
+  if(roll < 0.10){
+
+    return randomFrom(indexesFor("ULTRA"));
+
+  }
+
+  if(roll < 1.00){
+
+    return randomFrom(indexesFor("LEGEND LIMITED"));
+
+  }
+
+  if(roll < 10.00){
+
+    return randomFrom(indexesFor("SPARKING"));
+
+  }
+
+  if(roll < 35.00){
+
+    return randomFrom(indexesFor("EXTREME"));
+
+  }
+
+  return randomFrom(indexesFor("HERO"));
+}
+
+
+/* =========================
+   GUARANTEED SPARKING
+========================= */
+
+function guaranteedSparking(){
+
+  const highPool = [
+    ...indexesFor("SPARKING"),
+    ...indexesFor("LEGEND LIMITED"),
+    ...indexesFor("ULTRA"),
+    ...indexesFor("LEGEND")
+  ];
+
+  return randomFrom(highPool);
+}
+
+
+/* =========================
+   SUMMON
+========================= */
+
+function summon(amount){
+
+  const cost =
+    amount===1 ? 100 : 1000;
+
+  if(S.cc < cost){
+
+    alert("Not enough Chrono Crystals!");
+
+    return;
+  }
+
+  S.cc -= cost;
+
+  const results = [];
+
+  for(let i=0;i<amount;i++){
+
+    let p = pull();
+
+    /*
+      Last slot of a ×10:
+      guaranteed SPARKING or higher.
+    */
+
+    if(amount===10 && i===9){
+
+      const rarity = R[p][0];
+
+      if(
+        rarity==="HERO" ||
+        rarity==="EXTREME"
+      ){
+
+        p = guaranteedSparking();
+      }
+    }
+
+    results.push(p);
+
+    S.collection[p] =
+      (S.collection[p] || 0) + 1;
+  }
+
+
+  const bannerName =
+    BANNERS[bannerIndex].name;
+
+  const now =
+    new Date().toLocaleString();
+
+
+  /*
+    Add all results to history.
+  */
+
+  results.forEach(p=>{
+
+    S.history.unshift({
+
+      name:R[p][1],
+
+      rarity:R[p][0],
+
+      banner:bannerName,
+
+      time:now
+
+    });
+
+  });
+
+
+  /*
+    Keep the latest 100 results.
+  */
+
+  S.history =
+    S.history.slice(0,100);
+
+
+  save();
+  update();
+
+
+  /*
+    Show the LAST result.
+  */
+
+  showSummonScene(
+    results[results.length-1],
+    bannerName
+  );
+}
+
+
+/* =========================
+   SUMMON ANIMATION
+========================= */
+
+function showSummonScene(index,bannerName){
+
+  const scene = $("scene");
+
+  const rr = R[index];
+
+  scene.style.display = "block";
+
+  /*
+    Reset animation elements by cloning.
+  */
+
+  const oldScene = scene;
+
+  oldScene.querySelector(".beam").style.animation = "none";
+  oldScene.querySelector(".flash").style.animation = "none";
+  oldScene.querySelector(".orb").style.animation = "none";
+
+  void oldScene.offsetWidth;
+
+  oldScene.querySelector(".beam").style.animation =
+    "beam .7s 1.25s forwards";
+
+  oldScene.querySelector(".flash").style.animation =
+    "flash .3s 2.65s forwards";
+
+  oldScene.querySelector(".orb").style.animation =
+    "pulse .35s infinite alternate";
+
+
+  $("clash").innerHTML =
+    "ENERGY<br>CHARGING...";
+
+
+  $("legendExplosion").classList.remove("active");
+
+
+  setTimeout(()=>{
+
+    $("clash").innerHTML =
+      "💥 CLASH!";
+
+  },850);
+
+
+  setTimeout(()=>{
+
+    $("clash").innerHTML =
+      "🔥 TRANSFORMATION!";
+
+  },1600);
+
+
+  /*
+    LEGEND gets a special moment.
+  */
+
+  if(rr[0]==="LEGEND"){
+
+    setTimeout(()=>{
+
+      $("clash").innerHTML =
+        "👑 LEGENDARY<br>POWER!";
+
+      $("legendExplosion")
+        .classList.add("active");
+
+    },2150);
+
+  }
+
+
+  setTimeout(()=>{
+
+    $("rarity").textContent =
+      `★ ${rr[0]} ★`;
+
+    $("char").textContent =
+      rr[1];
+
+    $("element").textContent =
+      `ELEMENT: ${rr[2]}`;
+
+    const isFeatured =
+      rr[3] === bannerIndex;
+
+    $("bannerResult").textContent =
+      isFeatured
+        ? "⭐ FEATURED CHARACTER!"
+        : `Summoned from ${bannerName}`;
+
+
+    $("card").className =
+      "card " + rarityClass(rr[0]);
+
+
+  },3000);
+}
+
+
+/* =========================
+   CLOSE
+========================= */
+
+function closeScene(){
+
+  $("scene").style.display =
+    "none";
+
+  update();
+}
+
+
+/* =========================
+   TABS
+========================= */
+
+function tab(name){
+
+  $("collection")
+    .classList
+    .toggle(
+      "hidden",
+      name!=="collection"
+    );
+
+  $("history")
+    .classList
+    .toggle(
+      "hidden",
+      name!=="history"
+    );
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+function resetSave(){
+
+  if(!confirm(
+    "Reset all progress?\n\nThis will remove your CC, collection and summon history."
+  )){
+    return;
+  }
+
+  S = {
+    cc:10000,
+    pity:0,
+    collection:{},
+    history:[]
+  };
+
+  save();
+  update();
+}
+
+
+/* =========================
+   START
+========================= */
+
+renderBanner();
+update();
+
+</script>
+
+</body>
+</html>
